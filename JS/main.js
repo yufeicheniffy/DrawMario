@@ -4,11 +4,12 @@
         let realBoard=document.querySelector('#CSSCode');
         let codeContainer=document.querySelector('.code.Display')
         let n=0;
-        let clock=setInterval(()=>{
+        let clock=setTimeout(function runCode(){
             n+=1;
             codeBoard.innerHTML=Prism.highlight(codeTxt.substring(0, n), Prism.languages.css, 'css');
             realBoard.innerHTML=codeTxt.substring(0,n);
             codeContainer.scrollTop=codeContainer.scrollHeight;
+            clock=setTimeout(runCode,timeInterval);
         },timeInterval)
     }
     let code=`
@@ -29,8 +30,8 @@
 .mario .head{
     height:12.25em;
     width:12.25em;
-    border-radius:50%;
     background-color:#EBB29B;
+    border-radius:50%;
     position:relative;
     top: 5.3125em;
 }
@@ -38,12 +39,12 @@
 .mario .nose{
     height:4em;
     width:4.75em;
+    background-color:#E46061;
     border-radius:50%;
     position:absolute;
     top:5.3em;
     left:50%;
     transform:translateX(-2.375em);
-    background-color:#E46061;
     overflow:hidden;
     z-index:2;
 }
@@ -51,34 +52,34 @@
 .mario .nose::before{
     content: '';
     position: absolute;
-    top: -0.5em;
-    left: 50%;
     height: 2.5em;
     width: 4.5em;
+    background: #FA5B59;
+    top: -0.5em;
+    left: 50%;
     margin-left: -2.25em;
     border-radius: 40%;
-    background: #FA5B59;
 }
 /* 马里奥的眼睛*/
 .mario .eye{
     position: absolute;
-    top: 2.375em;
     height: 4em;
     width: 2.5em;
-    border-radius: 50%;
     background: linear-gradient(#E6D9D6 50%, #F9ECE8 50%);
+    border-radius: 50%;
+    top: 2.375em;
     overflow: hidden;
     z-index:2;
 }
 /* 马里奥的眼珠*/
 .mario .eye:before {
     content: '';
-    position: absolute;
-    top: 1.31em;
     height: 2.125em;
     width: 1.31em;
-    border-radius: 50%;
     background: #062226;
+    position: absolute;
+    top: 1.31em;
+    border-radius: 50%;
     z-index:2;
 }
 /* 左眼在左边 （难道在右边？）*/
@@ -97,26 +98,25 @@
 }
 .mario .eye.right:before {
     left: -0.2em;
-    -webkit-transform: rotate(-5deg);
     transform: rotate(-5deg);
 }
 /*马里奥的眉毛*/
 .mario .eyebrow {
-    position: absolute;
-    top: 0.5em;
     height: 5em;
     width: 3.375em;
+     background: #343235;
+    position: absolute;
+    top: 0.5em;
     border-radius: 50%;
-    background: #343235;
 }
 .mario .eyebrow:before {
     content: '';
-    position: absolute;
-    top: 1em;
     height: 100%;
     width: 120%;
-    border-radius: 50%;
     background: #F5B097;
+    position: absolute;
+    top: 1em;
+    border-radius: 50%;
 }
 /* 调整左右眉毛*/
 .mario .eyebrow.left {
@@ -125,7 +125,6 @@
 }
 .mario .eyebrow.right {
     right: 2em;
-    -webkit-transform: rotate(10deg);
     transform: rotate(10deg);
 }
 .mario .eyebrow.left:before {
@@ -136,34 +135,34 @@
 }
 /*马里奥的大胡子*/
 .moustache{position: absolute;
-    top: 6.5em;
-    left: 50%;
     height: 2.5em;
     width: 2.5em;
+    background: #343235;
+    top: 6.5em;
+    left: 50%;
     margin-left: -1.25em;
     border-radius: 50%;
-    background: #343235;
     box-shadow: -3.75em -0.5em 0 #343235, -2.75em 0.75em 0 #343235, -1.2em 1.5em 0 #343235, 0 0.5em 0 #343235, 1.2em 1.5em 0 #343235, 2.75em 0.75em 0 #343235, 3.75em -0.5em 0 #343235;
 }
 .mario .moustache:after {
+    height: 5em;
+    width: 10em;
+    background: #F5B097;
     content: '';
     position: absolute;
     top: -3.3em;
     left: 50%;
-    height: 5em;
-    width: 10em;
     margin-left: -5em;
     border-radius: 50%;
-    background: #F5B097;
 }
 /* 马里奥的耳朵*/
 .mario .ear {
-    position: absolute;
-    top: 10.5em;
     height: 4.25em;
     width: 4.25em;
-    border-radius: 50%;
     background: linear-gradient(#FFCBBD 30%, #EEA790 30%);
+    border-radius: 50%;
+    position: absolute;
+    top: 10.5em;
 }
 .mario .ear.left {
     left: -1.25em;
@@ -184,14 +183,14 @@
 /* A big logo*/
 .mario .hat-logo {
     position: absolute;
-    top: 1em;
-    left: 50%;
     width: 3.75em;
     height: 3.75em;
+    background: #FFF;
+    top: 1em;
+    left: 50%;
     margin-left: -1.875em;
     line-height: 3em;
     text-align: center;
-    background: #FFF;
     border-radius: 50%;
 }
 .mario .hat-logo:before {
@@ -204,13 +203,13 @@
 /* 帽沿准备一下*/
 .mario .hat-brim {
     position: absolute;
-    top: 4.8125em;
-    left: 50%;
     height: 12em;
     width: 12em;
+    background: #BD2B2D;
+    top: 4.8125em;
+    left: 50%;
     margin-left: -6em;
     border-radius: 50%;
-    background: #BD2B2D;
     transform: scale(1, 1.1);
     box-shadow: 0 -1em 0 0 #FA5B59;
     /* Super Mario！*/

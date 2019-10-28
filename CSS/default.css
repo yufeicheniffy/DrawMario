@@ -1,0 +1,30 @@
+*{margin: 0;border: 0;box-sizing: border-box}
+.wrapper-Display{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.Display{
+    width:99%;
+    height: 45vh;
+    border: solid 1px black;
+    margin:2px;
+    overflow: auto;
+}
+.action{
+    text-align: center;
+}
+.action>button{
+    padding: 5px 10px;
+    margin:0 10px;
+    background-color: #eee;
+}
+.action>button:hover{
+    background-color: #888;
+}
+.action>button:focus{
+    outline:none;
+}
+button.active{
+    box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
+}
