@@ -206,11 +206,11 @@
 }
 /* 马里奥的耳朵*/
 .mario .ear {
+    position: absolute;
     height: 4.25em;
     width: 4.25em;
     background: linear-gradient(#FFCBBD 30%, #EEA790 30%);
     border-radius: 50%;
-    position: absolute;
     top: 10.5em;
 }
 .mario .ear.left {
