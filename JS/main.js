@@ -2,15 +2,64 @@
     function writeCode(codeTxt,timeInterval,callBack){
         let codeBoard=document.querySelector('#codeBoard');
         let realBoard=document.querySelector('#CSSCode');
-        let codeContainer=document.querySelector('.code.Display')
+        let codeContainer=document.querySelector('.code.Display');
         let n=0;
+        let clockStatus=false;//no existed clock here
         let clock=setTimeout(function runCode(){
             n+=1;
             codeBoard.innerHTML=Prism.highlight(codeTxt.substring(0, n), Prism.languages.css, 'css');
             realBoard.innerHTML=codeTxt.substring(0,n);
             codeContainer.scrollTop=codeContainer.scrollHeight;
             clock=setTimeout(runCode,timeInterval);
-        },timeInterval)
+            clockStatus=true;
+        },timeInterval);
+        let buttons=Array.from(document.querySelectorAll('.action>button'));
+        for (let speedButton of buttons){
+            speedButton.addEventListener('click',(event)=>{
+                let speed=event.target.getAttribute('data-speed');
+                if(speed==='slow'){
+                    timeInterval=60;
+                    changeButtonActive(speedButton);
+                }
+                if(speed==='normal'){
+                    timeInterval=20;
+                    changeButtonActive(speedButton);
+                }
+                if(speed==='fast'){
+                    timeInterval=0;
+                    changeButtonActive(speedButton);
+                }
+                if(speed==='pause'){
+                    setNewClock();
+                    if(speedButton.classList.contains('active')){
+                        speedButton.classList.remove('active');
+                    }else{
+                        speedButton.classList.add('active');
+                    }
+                }
+            })
+        }
+        function setNewClock(){
+            if(clockStatus){
+                window.clearTimeout(clock);
+                clockStatus=false;
+            }else{
+                clockStatus=true;
+                clock=setTimeout(function runCode(){
+                    n+=1;
+                    codeBoard.innerHTML=Prism.highlight(codeTxt.substring(0, n), Prism.languages.css, 'css');
+                    realBoard.innerHTML=codeTxt.substring(0,n);
+                    codeContainer.scrollTop=codeContainer.scrollHeight;
+                    clock=setTimeout(runCode,timeInterval);
+                },timeInterval);
+            }
+        }
+        function changeButtonActive(speedButton){
+            for(let speedButton2 of buttons) {
+                speedButton2.classList.remove('active');
+            }
+            speedButton.classList.add('active');
+        }
     }
     let code=`
  /* 用CSS 画个马里奥送给你*/
@@ -215,5 +264,6 @@
     /* Super Mario！*/
 }
     `;
-    writeCode(code,0);
+    let timeInterval=20;
+    writeCode(code,timeInterval);
 }
