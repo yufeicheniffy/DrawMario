@@ -1,0 +1,13 @@
+*{margin: 0;border: 0;box-sizing: border-box}
+.wrapper-Display{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.Display{
+    width:99%;
+    height: 45vh;
+    border: solid 1px black;
+    margin:2px;
+    overflow: auto;
+}
